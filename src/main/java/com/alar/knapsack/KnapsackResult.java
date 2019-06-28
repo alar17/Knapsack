@@ -5,7 +5,19 @@ import java.util.UUID;
 import io.vavr.collection.List;
 import io.vavr.control.Option;
 
+/**
+ * A wrapper for result of the knapsack problem.
+ * @author alar
+ *
+ */
 public class KnapsackResult {
+
+    /**
+     * Accepted: The actor started to solve the Knapsack problem
+     * Processing: The result is not ready yet
+     * Completed: The solution is ready
+     * @author alar
+     */
     public enum ResponseType {
         Accepted, Processing, Completed
     }
@@ -52,11 +64,22 @@ public class KnapsackResult {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "ResponseType" + responseType + "\n Result:" + result;
+
+    }
+
+    /**
+     * The result of knapsack problem including weights and values of the selected items.
+     * @author alar
+     *
+     */
     public static class Result {
         private final List<Integer> weights;
         private final List<Integer> values;
 
-        private Result(List<Integer> weights, List<Integer> values) {
+        Result(List<Integer> weights, List<Integer> values) {
             this.weights = weights;
             this.values = values;
         }
@@ -67,6 +90,11 @@ public class KnapsackResult {
 
         public List<Integer> getValues() {
             return values;
+        }
+
+        @Override
+        public String toString() {
+            return "Weights: " + weights + " - Values: " + values;
         }
     }
 }

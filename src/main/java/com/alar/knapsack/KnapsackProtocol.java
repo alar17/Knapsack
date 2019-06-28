@@ -13,20 +13,23 @@ import akka.actor.AbstractActor.Receive;
 import akka.pattern.PatternsCS;
 import io.vavr.collection.List;
 
-public class Knapsackprotocol {
-
+/**
+ * The protocol class which is responsible for craeting new actors, route commands to the recipient actor,
+ * and send back the response to the directive layer. This class can be a sharding protocol, if we need to serve many simultaneous requests.
+ * @author alar
+ *
+ */
+public class KnapsackProtocol {
     ActorSystem system;
     ActorRef knapsack;
-    public Knapsackprotocol(ActorSystem system) {
+
+    public KnapsackProtocol(ActorSystem system) {
         this.system = system;
     }
 
     public CompletionStage<KnapsackResult> read(UUID id) {
         CompletionStage<KnapsackResult> read = ask(id, (KnapsackCommand) ReadCommand.getInstance());
         read.thenApply(s -> {
-            System.out.println(" *** Final Result ****" + s);
-            System.out.println("Type:" + s.getResponseType());
-            System.out.println("ID:" + s.getId());
             if (s.getResult().isDefined()) {
                 System.out.println("Result: " + s.getResult().get().getValues() + "---" + s.getResult().get().getWeights());
             }
@@ -35,36 +38,35 @@ public class Knapsackprotocol {
         return read;
     }
 
+    /**
+     * Create a new knapsackActor which is responsible for solving an specific knapsack problem and sending the result later
+     */
     public CompletionStage<KnapsackResult> createKnapsackActor(CreateCommand cmd) {
         // creates an id with the new UUID. Pass the paramters
         UUID id = UUID.randomUUID();
 
+        // Creating the actor
         knapsack = system.actorOf(Props.create(KnapsackActor.class, id), id.toString());//new KnapsackActor(getContext().actorOf(Props.empty(), id.toString()));
-        System.out.println("ActorRef: " + knapsack);
-        System.out.println("Path: " + knapsack.path());
-        System.out.println("Terminated: " + knapsack.isTerminated());
-        CompletionStage<KnapsackResult> result = ask(id, cmd);
-        System.out.println("Provisional Result:" + result);
-        result.thenApply(s -> {
-            System.out.println(" *** Final Result ****" + s);
-            System.out.println("Type:" + s.getResponseType());
-            System.out.println("ID:" + s.getId());
-            System.out.println("Result:" + s.getResult());
-            return s;
-        });
-        return result;
+
+        // The provisional result of creating the problem. Asking the actor to solve the Knapsack problem Asynchronously
+        return ask(id, cmd);
     }
 
-    protected CompletionStage<KnapsackResult> ask(UUID id, KnapsackCommand cmd) {
+    /**
+     * Sending the ask command to the actor with id in the path
+     */
+    private CompletionStage<KnapsackResult> ask(UUID id, KnapsackCommand cmd) {
         System.out.println("received ask for:" + id + " --- command: " + cmd);
         ActorSelection selection = selection(id);
 
-        return PatternsCS.ask(selection, cmd, 1000)
+        return PatternsCS.ask(selection, cmd, 2000)
             .thenApply(resp -> (KnapsackResult) resp);
     }
 
-    public ActorSelection selection(UUID id) {
-        // TODO: FIND THE ACTUAL ONE BASED ON ID
-        return system.actorSelection(knapsack.path());
+    /**
+     * Finding the target Actor
+     */
+    private ActorSelection selection(UUID id) {
+        return system.actorSelection(ActorPath.fromString("akka://default/user/" + id.toString()));
     }
 }

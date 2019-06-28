@@ -1,20 +1,17 @@
 package com.alar.knapsack;
-
-// A Dynamic Programming based solution for 0-1 Knapsack problem
-// https://www.geeksforgeeks.org/java-program-for-dynamic-programming-set-10-0-1-knapsack-problem/
+/**
+ * The solving algorithm of Knapsack problem which has been taken from the following resource:
+ * A Dynamic Programming based solution for 0-1 Knapsack problem
+ * https://www.geeksforgeeks.org/java-program-for-dynamic-programming-set-10-0-1-knapsack-problem/
+ */
 class Solver {
 
     // A utility function that returns maximum of two integers
     static int max(int a, int b) { return (a > b) ? a : b; }
 
-    // Returns the maximum value that can be put in a knapsack
-    // of capacity W
+    // Returns the maximum value that can be put in a knapsack of capacity W
     static int solve(int W, int wt[], int val[]) {
     //static int solve() {
-        System.out.println("Trying to Solve:");
-//        int val[] = new int[] { 60, 100, 120 };
-//        int wt[] = new int[] { 10, 20, 30 };
-//        int W = 50;
         int n = val.length;
         int i, w;
         int K[][] = new int[n + 1][W + 1];

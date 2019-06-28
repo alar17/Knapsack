@@ -18,23 +18,17 @@ import io.vavr.control.Option;
 import com.alar.knapsack.KnapsackResult.ResponseType;
 import com.alar.knapsack.KnapsackResult.Result;
 
+/**
+ * The Knapsack actor is responsible for solving the problem and sending the result back if requested.
+ * It's extendted the Akka actors. Please read the Akka actor documentation for more information.
+ * @author alar
+ */
 public class KnapsackActor extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
-    //private final ActorRef actorRef;
-    private ActorRef lastSender;
     private Option<KnapsackResult.Result> result;
     private final UUID id;
-//    public KnapsackActor(ActorSystem system) {
-//      //getContext().watch(child); // <-- this is the only call needed for registration
-//      //lastSender = system.deadLetters();
-//    }
-
-//    public KnapsackActor() {
-//        //this.actorRef = actorRef; //getContext().actorOf(Props.empty(), "target");
-//    }
 
     public KnapsackActor(UUID id) {
-        //this(getContext().actorOf(Props.empty(), id.toString()));
         this.id = id;
     }
 
@@ -68,22 +62,15 @@ public class KnapsackActor extends AbstractActor {
     }
 
     private void handleCreate(CreateCommand cmd) {
-        System.out.println("Handling Create");
         result = Option.some(knapsackAlgorithm(cmd.getCapacity(), cmd.getWeights(), cmd.getValues()));
-//        CompletableFuture.runAsync(() -> {
-//            System.out.println("Handling Create Async!");
-//            result = Option.some(knapsackAlgorithm(cmd.getCapacity(), cmd.getWeights(), cmd.getValues()));
-//        });
     }
 
     private KnapsackResult.Result knapsackAlgorithm(Integer c, int[] w, int[] v) {
         List<Integer> weights = List.of(Integer.valueOf(12));
         List<Integer> values = List.of(Integer.valueOf(12));
         System.out.println("Solution:");
-        // TODO:Insert the algorithm here
         int r = Solver.solve(c.intValue(), w, v);
         System.out.println("Result: " + r);
-
         return KnapsackResult.of(weights, values);
     }
 }

@@ -1,5 +1,9 @@
 package com.alar.knapsack;
 
+/**
+ * Command in order to create a new create request to Knapsack Actor.
+ * @author alar
+ */
 public class CreateCommand extends KnapsackCommand {
     private int capacity;
     private int[] weights;
