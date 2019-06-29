@@ -2,6 +2,7 @@ val akkaV = "2.5.16"
 val akkaHttpV = "10.1.4"
 val reaktiveV = "0.12.1"
 
+enablePlugins(JavaAppPackaging);
 
 libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-http" % akkaHttpV,
@@ -32,3 +33,4 @@ libraryDependencies ++= Seq(
     "io.github.oliviercailloux" % "google-or-tools" % "6.7.2",
     "com.typesafe.akka" %% "akka-http-jackson" % "akkaV"
   );
+
