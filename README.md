@@ -2,7 +2,7 @@
 Knapsack using Akka
 
 # Artichecture
-This repository contains a solution for knapsack problem, using the actor model architecture. The main focus of the solution is on the actor architecture [https://doc.akka.io/docs/akka/current/guide/tutorial_1.html] as opposed to knapsack algorithm. The algorith in the Solver class can be replaced easily by any other solutions.
+This repository contains a PoC solution for knapsack problem, using the actor model architecture. The main focus of the solution is on the actor architecture [https://doc.akka.io/docs/akka/current/guide/tutorial_1.html] as opposed to knapsack algorithm. The algorith in the Solver class can be replaced easily by any other solutions.
 
 The main two reason behind choosing actor architecture are scalability and concurrecy. 
 Using an specific actor for solving a knapsack problem, allows us to easily receive requests concurrently from several users, without being concerned about handling it. Moreover, since actors communicate via sending and receiving messages, we can easily handle requests asynchronously. 
@@ -65,6 +65,13 @@ In order to build a docker image using sbt-native-packager[https://github.com/sb
 * sbt docker:publishLocal
 * docker run -p 8080:8080 knapsack:0.1.0-SNAPSHOT
 
+# Future work
+This project has been made in a timeframe of 10 hours. The following items can be done in order to improve this PoC to a production quality code:
+* Add command validation phase to the actors.
+* Add exception handling in order to return a nice messsage to the user in case of failure
+* Adding unit tests for Akka classes using akka test suite
+* Adding integration tests, in order to protect the main functioanlity of the server
+* Create a docker-compose file in order to include all the dependencies
 
 
 
