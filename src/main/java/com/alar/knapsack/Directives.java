@@ -86,6 +86,6 @@ public class Directives extends AllDirectives {
 
         final Http http = Http.get(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = http().flow(system, materializer);
-        final CompletionStage<ServerBinding> binding = http.bindAndHandle(routeFlow, ConnectHttp.toHost("localhost", 8080), materializer);
+        final CompletionStage<ServerBinding> binding = http.bindAndHandle(routeFlow, ConnectHttp.toHost("0.0.0.0", 8080), materializer);
     }
 }

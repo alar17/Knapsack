@@ -23,6 +23,13 @@ In order to run the project using sbt, execute the following commands from the r
 * sbt compile
 * sbt run
 
+# Run Knapsack using docker image
+In order to run the knapsack server using the docker image, you can use the following command:
+```
+docker run -p 8080:8080 alar17/knapsack:0.1.1
+```
+
+# Sending Requests
 Now that the server is running, you can reach to it via port 8080 using curl. In order to send a new Knapsack problem, please use the following command:
 
 ```
