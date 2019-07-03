@@ -53,7 +53,7 @@ public class Directives extends AllDirectives {
                     System.out.println("Exception = " + e);
                     return reject();
                 }
-                return complete("Received POST request for order: " + completedResponse.getId());
+                return complete("Received POST request. Your Knapasck ID is: " + completedResponse.getId() + "\n");
             })
         );
 
@@ -72,7 +72,7 @@ public class Directives extends AllDirectives {
                     System.out.println("Exception = " + e);
                     return reject();
                 }
-                return complete("Received GET request for order " + id + "\n Result" + completedResponse);
+                return complete("Received GET request for order " + id + "\n Result:" + completedResponse + "\n");
             });
         });
         return postKnapsack.orElse(getKnapsack);

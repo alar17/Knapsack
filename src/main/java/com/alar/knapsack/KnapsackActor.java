@@ -66,11 +66,7 @@ public class KnapsackActor extends AbstractActor {
     }
 
     private KnapsackResult.Result knapsackAlgorithm(Integer c, int[] w, int[] v) {
-        List<Integer> weights = List.of(Integer.valueOf(12));
-        List<Integer> values = List.of(Integer.valueOf(12));
         System.out.println("Solution:");
-        int r = Solver.solve(c.intValue(), w, v);
-        System.out.println("Result: " + r);
-        return KnapsackResult.of(weights, values);
+        return Solver.solve(c.intValue(), w, v);
     }
 }

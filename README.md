@@ -44,7 +44,7 @@ Date: Sat, 29 Jun 2019 10:47:22 GMT
 Content-Type: text/plain; charset=UTF-8
 Content-Length: 69
 
-Received POST request for order: 76dcd13d-ba38-4854-9892-fa88fb68bd0f
+Received POST request. Your problem ID is: c076bc65-ac3b-488c-8a16-852b91d88d04
 ```
 
 The response includes a UUID, which is the identifier of the requested problem. The server will solve it and prepare the result. You can ask for the result using the same UUID:
@@ -57,13 +57,13 @@ If everything goes well, the server will respond with 200 OK, including the maxi
 ```
 HTTP/1.1 200 OK
 Server: akka-http/10.1.4
-Date: Sat, 29 Jun 2019 10:49:25 GMT
+Date: Sat, 29 Jun 2019 10:47:43 GMT
 Content-Type: text/plain; charset=UTF-8
-Content-Length: 147
+Content-Length: 157
 
-Received GET request for order 76dcd13d-ba38-4854-9892-fa88fb68bd0f
- ResultResponseTypeCompleted
- Result:Some(40)
+Received GET request for order c076bc65-ac3b-488c-8a16-852b91d88d04
+ Result:ResponseTypeCompleted
+ Result:Some(Weights: List(33, 10) - Values: List(30, 10))
 ``` 
 
 # Building docker image and publishing it
@@ -78,7 +78,6 @@ This project has been made in a timeframe of 10 hours. The following items can b
 * Add exception handling in order to return a nice messsage to the user in case of failure
 * Adding unit tests for Akka classes using akka test suite
 * Adding integration tests, in order to protect the main functioanlity of the server
-* Create a docker-compose file in order to include all the dependencies
 
 
 
