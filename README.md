@@ -26,7 +26,7 @@ In order to run the project using sbt, execute the following commands from the r
 # Run Knapsack using docker image
 In order to run the knapsack server using the docker image, you can use the following command:
 ```
-docker run -p 8080:8080 alar17/knapsack:0.1.1
+docker-compose up
 ```
 
 # Sending Requests
