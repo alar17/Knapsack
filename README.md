@@ -1,7 +1,7 @@
 # Knapsack
 Knapsack using Akka
 
-# Artichecture
+# Architecture
 This repository contains a PoC solution for knapsack problem, using the actor model architecture. The main focus of the solution is on the actor architecture [https://doc.akka.io/docs/akka/current/guide/tutorial_1.html] as opposed to knapsack algorithm. The algorith in the Solver class can be replaced easily by any other solutions.
 
 The main two reason behind choosing actor architecture are scalability and concurrecy. 
@@ -12,7 +12,7 @@ For more information and details about the architecture please read the followin
 Akka actors [https://doc.akka.io/docs/akka/current/actors.html]
 Akka Directives [https://doc.akka.io/docs/akka-http/current/routing-dsl/directives/index.html]
 Akka Unmarshaller [https://doc.akka.io/docs/akka-http/current/common/unmarshalling.html]
-AKka HTTP [https://doc.akka.io/docs/akka-http/current/index.html]
+Akka HTTP [https://doc.akka.io/docs/akka-http/current/index.html]
 
 # Scalability 
 By using a protocol, we can shard actors in different servers of the cluster. By increasing number of servers and cluster we can easily scale up to be able to respond to 10, 100, 1000 or 10,000 knapsack problems simultaneously.
