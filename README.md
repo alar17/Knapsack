@@ -2,9 +2,9 @@
 Knapsack using Akka
 
 # Architecture
-This repository contains a PoC solution for knapsack problem, using the actor model architecture. The main focus of the solution is on the actor architecture [https://doc.akka.io/docs/akka/current/guide/tutorial_1.html] as opposed to knapsack algorithm. The algorith in the Solver class can be replaced easily by any other solutions.
+This repository contains a PoC solution for knapsack problem, using the actor model architecture. The main focus of the solution is the actor architecture [https://doc.akka.io/docs/akka/current/guide/tutorial_1.html] as opposed to the knapsack algorithm. The algorithm is in the Solver class and can be replaced easily by any other solutions.
 
-The main two reason behind choosing actor architecture are scalability and concurrecy. 
+The main two reasons behind choosing actor architecture are scalability and concurrecy. 
 Using an specific actor for solving a knapsack problem, allows us to easily receive requests concurrently from several users, without being concerned about handling it. Moreover, since actors communicate via sending and receiving messages, we can easily handle requests asynchronously. 
 
 For more information and details about the architecture please read the following resources:
